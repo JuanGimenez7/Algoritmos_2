@@ -2,6 +2,7 @@ import csv
 import json
 from datetime import datetime
 
+print("Este es un mensaje nuevo")
 #CREACION DE CLASE RESERVACION
 class Reservacion:
 #CONSTRUCTOR
@@ -121,3 +122,4 @@ class SistemaReservaciones:
 manager = SistemaReservaciones()
 manager.cargar_datos("datos.json")
 manager.ordenar_reservaciones_por_rango
+
