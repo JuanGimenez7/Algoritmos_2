@@ -31,7 +31,7 @@ class Funciones:
 
     def listar4(self):
         for reservacion in self.reservaciones:
-            print(reservacion.nombre_cliente,reservacion.fecha_entrada, reservacion.fecha_salida, reservacion.precio_total)
+            print(reservacion.nombre_cliente, reservacion.numero_personas)
     
     def listar5(self):
         for reservacion in self.reservaciones:
@@ -138,7 +138,6 @@ class Funciones:
 
             self.heapifydescendente(arr, n, largest)
 
-
     def heapsortdescendente(self, arr):
         n = len(arr)
 
@@ -149,7 +148,35 @@ class Funciones:
             arr[i], arr[0] = arr[0], arr[i]
             self.heapifydescendente(arr, i, 0)
 
-
+#METODO SHELLSORT PARA ORDENAR DE MANERA ASCENDENTE EL NUMERO DE PERSONAS
+    def shellsortascendente(self, lista):
+        n = len(lista)
+        brecha = n // 2
+        while brecha > 0:
+            for i in range(brecha, n):
+                temp = lista[i].numero_personas
+                j = i
+                while j >= brecha and lista[j - brecha].numero_personas > temp:
+                    lista[j].numero_personas = lista[j - brecha].numero_personas
+                    j -= brecha
+                lista[j].numero_personas = temp
+            brecha //= 2
+        return lista
+    
+#METODO SHELLSORT PARA ORDENAR DE MANERA DESCENDENTE EL NUMERO DE PERSONAS
+    def shellsortdescendente(self, lista):
+        n = len(lista)
+        brecha = n // 2
+        while brecha > 0:
+            for i in range(brecha, n):
+                temp = lista[i].numero_personas
+                j = i
+                while j >= brecha and lista[j - brecha].numero_personas < temp:
+                    lista[j].numero_personas = lista[j - brecha].numero_personas
+                    j -= brecha
+                lista[j].numero_personas = temp
+            brecha //= 2
+        return lista
 
 
 #MENU
@@ -184,7 +211,20 @@ if opc == 5:
         manager.heapsortdescendente(manager.reservaciones)
         print("Las reservaciones ordenadas de forma ascendente en base a su duracion de estadia son las siguientes:")
         manager.listar5()        
-                  
+
+elif opc == 4:
+    print("Escoja la forma en que serán ordenadas el numero de personas")
+    print("1. Ascendente")
+    print("2. Descendente")  
+    opc4 = int(input("Ingrese la opción a elegir: ")) 
+    if opc4 == 1:
+        manager.shellsortascendente(manager.reservaciones)
+        print("Las reservaciones ordenadas de forma ascendente en base a su numero de personas:")
+        manager.listar4()    
+    elif opc4 == 2:
+        manager.shellsortdescendente(manager.reservaciones)
+        print("Las reservaciones ordenadas de forma descendente en base a su numero de personas:")
+        manager.listar4()         
 else:
     print("La opcion elegida no es correcta")
 
