@@ -1,0 +1,41 @@
+[
+    {
+      "nombre_cliente": "John Doe",
+      "fecha_reserva": "2023-09-10",
+      "fecha_entrada": "2023-09-15",
+      "fecha_salida": "2023-09-20",
+      "num_habitacion": 101,
+      "duracion_estadia": 5,
+      "tipo_habitacion": "Individual",
+      "preferencias_alimentarias": "Vegetariano",
+      "num_personas": 1,
+      "contacto": "johndoe@example.com",
+      "precio_total": 500.00,
+      "metodo_pago": "Tarjeta de crédito",
+      "notas_adicionales": "Ninguna",
+      "estado_reservacion": "Confirmada",
+      "hora_checkin_checkout": "14:00-12:00",
+      "id_reservacion": 1,
+      "correo_cliente": "johndoe@example.com"
+    },
+    {
+      "nombre_cliente": "Jane Smith",
+      "fecha_reserva": "2023-09-11",
+      "fecha_entrada": "2023-09-18",
+      "fecha_salida": "2023-09-25",
+      "num_habitacion": 202,
+      "duracion_estadia": 7,
+      "tipo_habitacion": "Doble",
+      "preferencias_alimentarias": "Sin restricciones",
+      "num_personas": 2,
+      "contacto": "janesmith@example.com",
+      "precio_total": 800.00,
+      "metodo_pago": "Efectivo",
+      "notas_adicionales": "Ninguna",
+      "estado_reservacion": "Confirmada",
+      "hora_checkin_checkout": "15:00-12:00",
+      "id_reservacion": 2,
+      "correo_cliente": "janesmith@example.com"
+    }
+  ]
+  
