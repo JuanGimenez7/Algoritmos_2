@@ -25,9 +25,10 @@ class Reservacion:
 
 class Funciones:
 
-    def listar3(self):
+    def listar3(self, fecha1, fecha2):
         for reservacion in self.reservaciones:
-            print(reservacion.nombre_cliente,reservacion.fecha_entrada, reservacion.fecha_salida, reservacion.precio_total)
+            if fecha1 <= int(reservacion.fecha_reserva) <= fecha2:
+                print(reservacion.nombre_cliente, reservacion.fecha_reserva, reservacion.precio_total)
 
     def listar4(self):
         for reservacion in self.reservaciones:
@@ -178,6 +179,29 @@ class Funciones:
             brecha //= 2
         return lista
 
+#METODO MERGESORT PARA ORDENAR PRECIO ASCENDENTE
+    def merge_sort(self, list):
+        list_length = len(list)
+        if list_length == 1:
+            return list
+        mid_point = list_length // 2
+        left_partition = self.merge_sort(list[:mid_point])
+        right_partition = self.merge_sort(list[mid_point:])
+        return self.merge(left_partition, right_partition)
+
+    def merge(self, left, right):
+        output = []
+        i = j = 0
+        while i < len(left) and j < len(right):
+            if left[i].fecha_reserva < right[j].fecha_reserva:
+                output.append(left[i].fecha_reserva)
+                i += 1
+            else:
+                output.append(right[j].fecha_reserva)
+                j += 1
+        output.extend(left[i:].fecha_reserva)
+        output.extend(right[j:].fecha_reserva)
+        return output
 
 #MENU
             
@@ -187,7 +211,8 @@ manager.cargar_reservaciones_desde_json("datos.json")
 print("Menu de Ordenamiento de Reservaciones")
 print("-----------------Opciones-----------------")
 print("-Opcion 1:")
-print("-Opcion 4: Ordenar reservaciones según reservaciones realizadas")
+print("-Opcion 3: Ordenar el precio con un rango de fechas de reserva dada")
+print("-Opcion 4: Ordenar reservaciones según numero de personas")
 print("-Opcion 5: Ordenar reservaciones según su duración de estadía")
 opc = int(input("Ingrese la opcion de ordenamiento a elegir: "))
 #if opc == 1:
@@ -224,7 +249,28 @@ elif opc == 4:
     elif opc4 == 2:
         manager.shellsortdescendente(manager.reservaciones)
         print("Las reservaciones ordenadas de forma descendente en base a su numero de personas:")
-        manager.listar4()         
+        manager.listar4()
+
+elif opc == 3:
+    print("Escoja la forma en que serán ordenados los precios totales")
+    print("1. Ascendente")
+    print("2. Descendente")
+    opc3 = int(input("Ingrese la opción a elegir: "))
+    print("Escoja el rango de las fechas de reserva")
+    a1 = input("año de inicio: ")
+    m1 = input("mes de inicio: ")
+    d1 = input("dia de inicio: ")
+    t1 = int(a1 + m1 + d1)
+    a2 = input("año de fin: ")
+    m2 = input("mes de fin: ")
+    d2 = input("dia de fin: ")
+    t2 = int(a2 + m2 + d2)
+    if opc == 1:
+        manager.shellsortascendente(manager.reservaciones)
+        print("Las reservaciones ordenadas por el precio de forma ascendente en el rango de fecha dado es:")
+        manager.listar3(t1, t2) 
+        
+    
 else:
     print("La opcion elegida no es correcta")
 
