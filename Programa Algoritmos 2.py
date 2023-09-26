@@ -24,21 +24,22 @@ class Reservacion:
 
 #Definicion de la clase Hotel
 class Hotel:
-    def __init__(self, nombre, direccion, numero_telefono):
+    def __init__(self, nombre, direccion, numero_telefono, habitaciones_disponibles, reserva):
         self.nombre = nombre
         self.direccion = direccion
         self.numero_telefono = numero_telefono
-        self.habitaciones_disponibles = {}
-        self.reservas = []
+        self.habitaciones_disponibles = habitaciones_disponibles
+        self.reserva = reserva
 
     def crear_hotel():
         # Solicitar los datos del hotel
         nombre = input("Ingrese el nombre del hotel: ")
         direccion = input("Ingrese la dirección del hotel: ")
         numero_telefono = input("Ingrese el número de teléfono del hotel: ")
-
+        habitaciones_disponibles = list(input("Ingrese el número de las habitaciones disponibles: "))
+        reserva = list(input("Ingrese el número de las habitaciones reservadas del hotel: "))
         # Crear el hotel
-        hotel = Hotel(nombre, direccion, numero_telefono)
+        hotel = Hotel(nombre, direccion, numero_telefono, habitaciones_disponibles, reserva)
 
         # Agregar el hotel a la lista
         hoteles.append(hotel)
@@ -66,11 +67,14 @@ class Hotel:
             nombre = input("Ingrese el nuevo nombre del hotel: ")
             direccion = input("Ingrese la nueva dirección del hotel: ")
             numero_telefono = input("Ingrese el nuevo número de teléfono del hotel: ")
-
+            habitaciones_disponibles = list(input("Ingrese el número de las habitaciones disponibles: "))
+            reserva = list(input("Ingrese el número de las habitaciones reservadas del hotel: "))
             # Modificar los datos del hotel
             Hotel.nombre = nombre
             Hotel.direccion = direccion
             Hotel.numero_telefono = numero_telefono
+            Hotel.habitaciones_disponibles = habitaciones_disponibles
+            Hotel.reserva = reserva
 
             print("Hotel modificado")
         else:
@@ -97,7 +101,10 @@ class Hotel:
             print(f"Nombre: {hotel.nombre}")
             print(f"Dirección: {hotel.direccion}")
             print(f"Teléfono: {hotel.numero_telefono}")
+            print(f"Habitaciones disponibles: {hotel.habitaciones_disponibles}")
+            print(f"Habitaciones reservadas: {hotel.reserva}")
             print("---------------------------------")
+
 
     def guardar_datos(nombre_archivo, tipo_archivo):
         # Abrir el archivo en modo escritura
@@ -148,7 +155,7 @@ class Hotel:
         del self.habitaciones_disponibles[numero_habitacion]
 
     def crear_reserva(self, fecha_inicio, fecha_fin, numero_personas, numero_habitaciones, datos_cliente):
-        reserva = Reserva(fecha_inicio, fecha_fin, numero_personas, numero_habitaciones, datos_cliente)
+        reserva = Reservacion(fecha_inicio, fecha_fin, numero_personas, numero_habitaciones, datos_cliente)
         self.reservas.append(reserva)
 
     def modificar_reserva(self, numero_reserva, fecha_inicio, fecha_fin, numero_personas, numero_habitaciones, datos_cliente):
@@ -199,7 +206,7 @@ class Hotel:
     def generar_informe_hoteles(self):
         informe = ""
         informe += f"**Listado de hoteles:**\n"
-        for hotel in habitaciones_disponibles:
+        for hotel in self.habitaciones_disponibles:
             informe += f"* {Hotel.nombre}\n"
             informe += f"    Dirección: {Hotel.direccion}\n"
             informe += f"    Número de teléfono: {Hotel.numero_telefono}\n"
@@ -209,6 +216,53 @@ class Hotel:
                 informe += f"            * Tipo: {habitacion.tipo_habitacion}\n"
                 informe += f"            * Tarifa: {habitacion.tarifa}\n"
         return informe
+class Nodo:
+    def __init__(self, valor):
+        self.valor = valor
+        self.siguiente = None
+
+class Cola:
+    def __init__(self):
+        self.frente = None
+        self.fin = None
+
+    def esta_vacia(self):
+        return self.frente is None
+
+    def agregar(self, valor):
+        nodo_nuevo = Nodo(valor)
+        if self.esta_vacia():
+            self.frente = nodo_nuevo
+        else:
+            self.fin.siguiente = nodo_nuevo
+        self.fin = nodo_nuevo
+
+    def eliminar(self):
+        if self.esta_vacia():
+            return None
+        else:
+            valor_eliminado = self.frente.valor
+            self.frente = self.frente.siguiente
+            if self.frente is None:
+                self.fin = None
+            return valor_eliminado
+        
+    def ver_frente(self):
+        if self.esta_vacia():
+            return None
+        else:
+            return self.frente.valor
+        
+    def recorrer(self):
+        if self.esta_vacia():
+            print("La cola está vacía")
+        else:
+            self._recorrer_aux(self.frente)
+            
+    def _recorrer_aux(self, nodo):
+        if nodo is not None:
+            print(nodo.valor.nombre)
+            self._recorrer_aux(nodo.siguiente)
 
 def menu():
     print("**Menú de opciones**")
