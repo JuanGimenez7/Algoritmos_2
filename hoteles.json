@@ -1,0 +1,22 @@
+[
+    {
+        "nombre": "Hotel Mario",
+        "direccion": "Av. Marmol, calle 47",
+        "numero_telefono":"024392542"
+    },
+    {
+        "nombre": "Hotel Humboldt",
+        "direccion": "Av. Malasia, calle 51",
+        "numero_telefono":"0243345353"
+    },
+    {
+        "nombre": "Hotel Lima",
+        "direccion": "Av. Mr. Sander 57th, calle 534",
+        "numero_telefono":"023636323"
+    },
+    {
+        "nombre": "Hotel Dunda",
+        "direccion": "Av. Jr. david 91th, calle 412",
+        "numero_telefono":"028663278"
+    }
+]
